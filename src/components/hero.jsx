@@ -88,7 +88,7 @@ const Hero = () => {
                 {/* İllüstrasyon */}
                 <div className="text-center text-white">
                   <div className="w-32 h-32 bg-white/20 rounded-full mx-auto mb-4 flex items-center justify-center">
-                    <img src="/src/assets/1.jpg" alt="" class="rounded-3xl" />
+                    <img src="/1.jpg" alt="" class="rounded-3xl" />
                   </div>
                   <p className="text-lg font-medium">Çağrı Alagöz</p>
                   {/* <p className="text-sm opacity-90">Portfolio</p> */}
