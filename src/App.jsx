@@ -44,7 +44,7 @@ function App() {
       <Navbar />
       <Hero />
       <About />
-      {/* <Projects /> */}
+      <Projects /> 
       <Skills />
       {/* <Contact /> */}
     </div>

@@ -17,7 +17,7 @@ const Navbar = () => {
   const navItems = [
     { name: 'Ana Sayfa', href: '#home' },
     { name: 'Hakkımda', href: '#about' },
-    // { name: 'Projeler', href: '#projects' },
+    { name: 'Projeler', href: '#projects' },
     { name: 'Yetenekler', href: '#skills' },
     // { name: 'İletişim', href: '#contact' },
   ];

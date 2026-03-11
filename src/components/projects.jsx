@@ -1,45 +1,47 @@
+import ChatAppImage from '/src/assets/ChatApp.png';
+
 const Projects = () => {
   const projects = [
     {
       id: 1,
-      title: "E-Ticaret Sitesi",
-      description: "React ve Node.js kullanarak geliştirdiğim modern bir e-ticaret uygulaması. Kullanıcı girişi, sepete ekleme ve ödeme entegrasyonu içerir.",
-      image: "/project1.jpg", // Kendi proje resimlerini ekle
+      title: "Gerçek Zamanlı Mesajlaşma Sitesi",
+      description: "React ve Node.js kullanarak geliştirdiğim modern bir mesajlaşma sitesi.",
+      image: ChatAppImage,
       technologies: ["React", "Node.js", "MongoDB", "TailwindCSS"],
-      demoLink: "#",
-      githubLink: "#",
+      demoLink: "https://laflaf-chat-app.onrender.com/login",
+      githubLink: "https://github.com/Cgri01/LafLaf-chat-app",
       featured: true
     },
-    {
-      id: 2,
-      title: "Task Management App",
-      description: "Kullanıcıların görevlerini yönetebileceği responsive bir web uygulaması. Drag-drop özelliği ve gerçek zamanlı güncelleme.",
-      image: "/project2.jpg",
-      technologies: ["React", "Firebase", "CSS3", "JavaScript"],
-      demoLink: "#",
-      githubLink: "#",
-      featured: true
-    },
-    {
-      id: 3,
-      title: "Weather Dashboard",
-      description: "Hava durumu API'si kullanarak geliştirdiğim hava durumu uygulaması. 5 günlük tahmin ve konum bazlı veri sunar.",
-      image: "/project3.jpg",
-      technologies: ["JavaScript", "API", "CSS3", "HTML5"],
-      demoLink: "#",
-      githubLink: "#",
-      featured: false
-    },
-    {
-      id: 4,
-      title: "Portfolio Website",
-      description: "React ve TailwindCSS kullanarak oluşturduğum kişisel portfolio sitesi. Responsive tasarım ve modern UI.",
-      image: "/project4.jpg",
-      technologies: ["React", "TailwindCSS", "Vite", "JavaScript"],
-      demoLink: "#",
-      githubLink: "#",
-      featured: false
-    }
+    // {
+    //   id: 2,
+    //   title: "Task Management App",
+    //   description: "Kullanıcıların görevlerini yönetebileceği responsive bir web uygulaması. Drag-drop özelliği ve gerçek zamanlı güncelleme.",
+    //   image: "/project2.jpg",
+    //   technologies: ["React", "Firebase", "CSS3", "JavaScript"],
+    //   demoLink: "#",
+    //   githubLink: "#",
+    //   featured: true
+    // },
+    // {
+    //   id: 3,
+    //   title: "Weather Dashboard",
+    //   description: "Hava durumu API'si kullanarak geliştirdiğim hava durumu uygulaması. 5 günlük tahmin ve konum bazlı veri sunar.",
+    //   image: "/project3.jpg",
+    //   technologies: ["JavaScript", "API", "CSS3", "HTML5"],
+    //   demoLink: "#",
+    //   githubLink: "#",
+    //   featured: false
+    // },
+    // {
+    //   id: 4,
+    //   title: "Portfolio Website",
+    //   description: "React ve TailwindCSS kullanarak oluşturduğum kişisel portfolio sitesi. Responsive tasarım ve modern UI.",
+    //   image: "/project4.jpg",
+    //   technologies: ["React", "TailwindCSS", "Vite", "JavaScript"],
+    //   demoLink: "#",
+    //   githubLink: "#",
+    //   featured: false
+    // }
   ];
 
   return (
@@ -73,15 +75,30 @@ const Projects = () => {
                     ⭐ Öne Çıkan
                   </div>
                 )}
-                <div className="w-full h-full flex items-center justify-center text-white">
-                  <div className="text-center">
-                    <div className="w-16 h-16 bg-white/20 rounded-full mx-auto mb-3 flex items-center justify-center">
-                      <span className="text-2xl">🚀</span>
-                    </div>
-                    <p className="font-semibold">{project.title}</p>
-                    <p className="text-sm opacity-90">Proje Görseli</p>
-                  </div>
-                </div>
+                {/* GERÇEK RESİM BURADA GÖSTERİLİYOR */}
+                <img 
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    console.error('Resim yüklenemedi:', project.image);
+                    e.target.style.display = 'none';
+                    // Placeholder göster
+                    const parent = e.target.parentNode;
+                    const placeholder = document.createElement('div');
+                    placeholder.className = 'w-full h-full flex items-center justify-center text-white';
+                    placeholder.innerHTML = `
+                      <div class="text-center">
+                        <div class="w-16 h-16 bg-white/20 rounded-full mx-auto mb-3 flex items-center justify-center">
+                          <span class="text-2xl">🚀</span>
+                        </div>
+                        <p class="font-semibold">${project.title}</p>
+                        <p class="text-sm opacity-90">Proje Görseli</p>
+                      </div>
+                    `;
+                    parent.appendChild(placeholder);
+                  }}
+                />
               </div>
 
               {/* Proje İçerik */}
@@ -110,12 +127,16 @@ const Projects = () => {
                 <div className="flex space-x-3">
                   <a
                     href={project.demoLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-center py-2 px-4 rounded-lg font-medium transition-colors duration-200"
                   >
                     Demo
                   </a>
                   <a
                     href={project.githubLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex-1 border border-gray-300 hover:border-gray-400 text-gray-700 text-center py-2 px-4 rounded-lg font-medium transition-colors duration-200 flex items-center justify-center"
                   >
                     <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
