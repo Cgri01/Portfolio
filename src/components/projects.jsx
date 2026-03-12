@@ -8,7 +8,7 @@ const Projects = () => {
       description: "React ve Node.js kullanarak geliştirdiğim modern bir mesajlaşma sitesi.",
       image: ChatAppImage,
       technologies: ["React", "Node.js", "MongoDB", "TailwindCSS"],
-      demoLink: "https://laflaf-chat-app.onrender.com/login",
+      projectLink: "https://laflaf-chat-app.onrender.com/login",
       githubLink: "https://github.com/Cgri01/LafLaf-chat-app",
       featured: true
     },
@@ -18,7 +18,7 @@ const Projects = () => {
     //   description: "Kullanıcıların görevlerini yönetebileceği responsive bir web uygulaması. Drag-drop özelliği ve gerçek zamanlı güncelleme.",
     //   image: "/project2.jpg",
     //   technologies: ["React", "Firebase", "CSS3", "JavaScript"],
-    //   demoLink: "#",
+    //   projectLink: "#",
     //   githubLink: "#",
     //   featured: true
     // },
@@ -28,7 +28,7 @@ const Projects = () => {
     //   description: "Hava durumu API'si kullanarak geliştirdiğim hava durumu uygulaması. 5 günlük tahmin ve konum bazlı veri sunar.",
     //   image: "/project3.jpg",
     //   technologies: ["JavaScript", "API", "CSS3", "HTML5"],
-    //   demoLink: "#",
+    //   projectLink: "#",
     //   githubLink: "#",
     //   featured: false
     // },
@@ -38,7 +38,7 @@ const Projects = () => {
     //   description: "React ve TailwindCSS kullanarak oluşturduğum kişisel portfolio sitesi. Responsive tasarım ve modern UI.",
     //   image: "/project4.jpg",
     //   technologies: ["React", "TailwindCSS", "Vite", "JavaScript"],
-    //   demoLink: "#",
+    //   projectLink: "#",
     //   githubLink: "#",
     //   featured: false
     // }
@@ -126,12 +126,12 @@ const Projects = () => {
                 {/* Butonlar */}
                 <div className="flex space-x-3">
                   <a
-                    href={project.demoLink}
+                    href={project.projectLink}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-center py-2 px-4 rounded-lg font-medium transition-colors duration-200"
                   >
-                    Demo
+                    Website
                   </a>
                   <a
                     href={project.githubLink}
