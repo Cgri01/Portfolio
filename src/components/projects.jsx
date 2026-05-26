@@ -1,4 +1,5 @@
 import ChatAppImage from '/src/assets/ChatApp.png';
+import NeuralStyleTransferImage from '/src/assets/NeuralStyle.png';
 
 const Projects = () => {
   const projects = [
@@ -12,16 +13,16 @@ const Projects = () => {
       githubLink: "https://github.com/Cgri01/LafLaf-chat-app",
       featured: true
     },
-    // {
-    //   id: 2,
-    //   title: "Task Management App",
-    //   description: "Kullanıcıların görevlerini yönetebileceği responsive bir web uygulaması. Drag-drop özelliği ve gerçek zamanlı güncelleme.",
-    //   image: "/project2.jpg",
-    //   technologies: ["React", "Firebase", "CSS3", "JavaScript"],
-    //   projectLink: "#",
-    //   githubLink: "#",
-    //   featured: true
-    // },
+     {
+       id: 2,
+       title: "Gerçek Zamanlı Görüntü Stil Transferi Uygulaması",
+       description: "Python ai modelleri kullanarak geliştirdiğim gerçek zamanlı görüntü stil transferi uygulaması. Kullanıcıların görüntülerini gerçek zamanlı olarak farklı stillere dönüştürebildiği bir platform.",
+       image: NeuralStyleTransferImage,
+       technologies: ["Python" , "FastAPI", "React", "WebSockets" , "TailwindCSS" , "AI models"], 
+       projectLink: "https://neural-style-transfer-liart.vercel.app/",
+       githubLink: "https://github.com/Cgri01/neural-style-transfer",
+       featured: true
+     },
     // {
     //   id: 3,
     //   title: "Weather Dashboard",
