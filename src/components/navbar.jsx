@@ -19,7 +19,7 @@ const Navbar = () => {
     { name: 'Hakkımda', href: '#about' },
     { name: 'Projeler', href: '#projects' },
     { name: 'Yetenekler', href: '#skills' },
-    // { name: 'İletişim', href: '#contact' },
+    { name: 'İletişim', href: '#contact' },
   ];
 
   return (

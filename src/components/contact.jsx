@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import emailjs from 'emailjs-com';
-
+import emailjs from '@emailjs/browser';
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -37,7 +36,7 @@ const Contact = () => {
     )
     .then((result) => {
       console.log('Email gönderildi:', result.text);
-      alert('Mesajınız gönderildi! En kısa sürede dönüş yapacağım.');
+      alert('Mesajınızı aldım! En kısa sürede dönüş yapacağım.');
       
       // Formu temizle
       setFormData({
