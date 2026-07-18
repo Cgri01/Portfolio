@@ -15,8 +15,8 @@ const About = () => {
           {/* Giriş Paragrafı */}
           <div className="text-center mb-8">
             <p className="text-xl text-gray-700 leading-relaxed">
-              "Kod yazmak benim için sadece bir meslek değil, bir tutku. 
-              Her satır kodla yeni bir problem çözmenin ve hayatı kolaylaştırmanın heyecanını yaşıyorum."
+              Kod yazmak benim için sadece bir meslek değil, bir tutku. 
+              Her satır kodla yeni bir problem çözmenin ve hayatı kolaylaştırmanın heyecanını yaşıyorum.
             </p>
           </div>
 
@@ -36,7 +36,7 @@ const About = () => {
                   </li>
                   <li className="flex justify-between">
                     <span>Ünvan:</span>
-                    <span className="font-medium">Yazılım Mühendisliği Öğrencisi</span>
+                    <span className="font-medium">Yazılım Mühendisi</span>
                   </li>
                   <li className="flex justify-between">
                     <span>Şehir:</span>
@@ -58,7 +58,7 @@ const About = () => {
                 <div className="bg-green-50 rounded-lg p-4">
                   <p className="font-medium text-gray-800">Yazılım Mühendisliği</p>
                   <p className="text-sm text-gray-600">Yakın Doğu Üniversitesi</p>
-                  <p className="text-xs text-gray-500 mt-1">2021 - Devam Ediyor</p>
+                  <p className="text-xs text-gray-500 mt-1">2021 - 2026</p>
                 </div>
               </div>
             </div>
@@ -103,21 +103,20 @@ const About = () => {
             </div>
           </div>
 
-          {/* Detaylı Açıklama
-          <div className="border-t pt-8">
+          
+          {/* <div className="border-t pt-8">
             <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
               Benim Hikayem
             </h3>
             <div className="text-gray-600 leading-relaxed space-y-4">
               <p>
-                Yazılım dünyasına ilk adımımı [ne zaman/ nasıl] attım ve o günden beri 
+                Yazılım dünyasına ilk adımımı lise sonunda, HTML ve CSS ile attım ve o günden beri 
                 kendimi bu alanda geliştirmeye devam ediyorum. Üniversitede yazılım mühendisliği 
                 eğitimi alırken, teorik bilgilerimi pratik projelerle pekiştiriyorum.
               </p>
               <p>
                 Amacım, kullanıcı deneyimini ön planda tutan, modern ve etkili yazılım çözümleri 
-                üretmek. Yeni teknolojiler öğrenmek ve open source projelere katkıda bulunmak 
-                benim için büyük bir motivasyon kaynağı.
+                üretmek. Yeni teknolojiler öğrenmek ve kendimi sürekli geliştirmek
               </p>
               <p>
                 Boş zamanlarımda [hobilerin] ile ilgileniyor, sürekli olarak kendimi 
@@ -129,8 +128,8 @@ const About = () => {
           {/* CV Butonu */}
           <div className="text-center mt-8">
             <a
-              href="/cv.pdf"
-              download
+              href="/CagriCv.pdf"
+              // download
               className="inline-flex items-center px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
             >
               <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

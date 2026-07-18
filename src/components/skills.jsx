@@ -8,7 +8,7 @@ const Skills = () => {
     {
       category: "Backend",
       icon: "⚙️",
-      skills: ["C#", "SQL"]
+      skills: ["C#", "SQL" , "Node.js", "Express.js", "Java"]
     },
     {
       category: "Araçlar & Diğer",
@@ -80,7 +80,7 @@ const Skills = () => {
               Öğrenme Yolculuğum
             </h3>
             <p className="leading-relaxed opacity-90">
-              Şu anda <strong>Node.js</strong>, ve <strong>React Native </strong> 
+              Şu anda <strong>Java</strong>, ve <strong>React Native </strong> 
               üzerine odaklanıyorum. Her gün yeni bir şey öğrenmek 
               benim için bir tutku.
             </p>

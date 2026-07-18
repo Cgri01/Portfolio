@@ -3,7 +3,7 @@ import {useState , useEffect} from 'react';
 const Hero = () => {
 
   const [textIndex , setTextIndex] = useState(0);
-  const texts = ["Yazılım Mühendisliği Öğrencisi" , "Web Geliştirici" , "Teknoloji Meraklısı" , "Problem Çözücü"];
+  const texts = ["Yazılım Mühendisi" , "Web Geliştirici" , "Teknoloji Meraklısı" , "Problem Çözücü"];
 
   //Yazı animasyonu
   useEffect(() => {
@@ -36,7 +36,7 @@ const Hero = () => {
               </div>
  
               <p className="text-lg text-gray-600 mb-8 max-w-2xl">
-                Yazılım mühendisliği öğrencisi olarak, web geliştirme ve teknolojiye olan tutkumla yenilikçi çözümler üretmeyi hedefliyorum. Problem çözme yeteneğim ve sürekli öğrenme isteğimle, her projede en iyisini sunmayı amaçlıyorum.
+                Yazılım mühendisi olarak, web geliştirme ve teknolojiye olan tutkumla yenilikçi çözümler üretmeyi hedefliyorum. Problem çözme yeteneğim ve sürekli öğrenme isteğimle, her projede en iyisini sunmayı amaçlıyorum.
               </p>
 
               {/* Butonlar */}
