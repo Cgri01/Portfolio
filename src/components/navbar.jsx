@@ -44,7 +44,7 @@ const Navbar = () => {
             </div>
             <div>
               <h1 className="text-xl font-bold text-gray-800">Çağrı Alagöz</h1>
-              <p className="text-xs text-gray-500">Yazılım Mühendisliği Öğrencisi</p>
+              <p className="text-xs text-gray-500">Yazılım Mühendisi</p>
             </div>
           </div>
 
