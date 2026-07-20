@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { role: 'bot', text: 'Merhaba! Çağrı hakkında merak ettiğin bir şey var mı, bana sorabilirsin?' }
+    { role: 'assistant', content: 'Merhaba! Çağrı hakkında merak ettiğin bir şey var mı, bana sorabilirsin?' }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -17,42 +17,44 @@ const Chatbot = () => {
     scrollToBottom();
   }, [messages, isOpen]);
 
-  const handleSend = async () => {
-    const trimmed = input.trim();
-    if (!trimmed || isLoading) return;
+const handleSend = async () => {
+  const trimmed = input.trim();
+  if (!trimmed || isLoading) return;
 
-    const userMessage = { role: 'user', text: trimmed };
-    setMessages((prev) => [...prev, userMessage]);
-    setInput('');
-    setIsLoading(true);
+  const userMessage = { role: 'user', content: trimmed };
+  const updatedMessages = [...messages, userMessage];
 
-    try {
-      const res = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: trimmed })
-      });
+  setMessages(updatedMessages);
+  setInput('');
+  setIsLoading(true);
 
-      const data = await res.json();
+  try {
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: updatedMessages })
+    });
 
-      if (data.reply) {
-        setMessages((prev) => [...prev, { role: 'bot', text: data.reply }]);
-      } else {
-        setMessages((prev) => [
-          ...prev,
-          { role: 'bot', text: 'Bir hata oluştu, tekrar deneyebilir misiniz?' }
-        ]);
-      }
-    } catch (error) {
-      console.error(error);
+    const data = await res.json();
+
+    if (data.reply) {
+      setMessages((prev) => [...prev, { role: 'assistant', content: data.reply }]);
+    } else {
       setMessages((prev) => [
         ...prev,
-        { role: 'bot', text: 'Bağlantı hatası, tekrar deneyebilir misiniz?' }
+        { role: 'assistant', content: 'Bir hata oluştu, tekrar dener misin?' }
       ]);
-    } finally {
-      setIsLoading(false);
     }
-  };
+  } catch (error) {
+    console.error(error);
+    setMessages((prev) => [
+      ...prev,
+      { role: 'assistant', content: 'Bağlantı hatası, tekrar dener misin?' }
+    ]);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -105,7 +107,8 @@ const Chatbot = () => {
                       : 'bg-white text-gray-800 border border-gray-200 rounded-bl-sm'
                   }`}
                 >
-                  {msg.text}
+                  
+                  {msg.content}
                 </div>
               </div>
             ))}

@@ -11,34 +11,38 @@ Sadece bu bilgilerle ilgili sorulara cevap ver, bilmediğin bir şey sorulursa
 Hakkında bilgiler:
 - İsim: Çağrı Alagöz
 - Ünvan: Yazılım Mühendisi
-- Okul: Yakın Doğu Üniversitesi, 2021-2026
+- Okul: Yakın Doğu Üniversitesi, 2021'de başlayıp 2026'da mezun oldu.
+- Bölüm: Yazılım Mühendisi
 - Şehir: Adana / Lefkoşa
 - Teknolojiler: React, JavaScript, TailwindCSS, Angular, Python, C#
+- Bildiği diller: Türkçe anadili , İngilizce akıcı konuşma ve anlama.
 - İlgi alanları: Web Geliştirme, UI/UX Tasarım, Arduino, Yapay Zeka, IT, Spor
 - Deneyimler:
-    Net Bilişim ve Yazılım Hizmetlerindeki stajında, C# ve Angular kullanarak fullstack web uygulamaları geliştirdi. /
+    Net Bilişim ve Yazılım Hizmetlerindeki stajında, C# ve Angular kullanarak fullstack web uygulamaları geliştirdi.
     Adana Organize Sanayi Bölgesi'nde, IT stajı yaparak, sistem yönetimi ve ağ güvenliği konularında deneyim kazandı.  
 - İletişim: cgriag@gmail.com
 - Telefon numarası: +90 541 732 5925
 - Askerlik durumu: Tecilli 2030'un aralık ayına kadar tecili var.
 
-Çok uzun olmayan, samimi ve yardımsever cevaplar ver. Türkçe konuş.
+Çok uzun olmayan, samimi ve yardımsever cevaplar ver. Sadece Türkçe konuş, yabancı kelime kullanma.
 `;
-
 export const handler = async (event) => {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
   try {
-    const { message } = JSON.parse(event.body);
+    const { messages } = JSON.parse(event.body);
 
-    if (!message) {
+    if (!messages || !Array.isArray(messages) || messages.length === 0) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ error: 'Mesaj boş olamaz' })
+        body: JSON.stringify({ error: 'Mesaj geçmişi boş olamaz' })
       };
     }
+
+    // Güvenlik: çok uzun geçmişleri kırp (son 10 mesaj yeterli, token israfını önler)
+    const recentMessages = messages.slice(-10);
 
     const groq = new OpenAI({
       apiKey: process.env.GROQ_API_KEY,
@@ -49,7 +53,7 @@ export const handler = async (event) => {
       model: 'llama-3.3-70b-versatile',
       messages: [
         { role: 'system', content: SYSTEM_CONTEXT },
-        { role: 'user', content: message }
+        ...recentMessages
       ]
     });
 

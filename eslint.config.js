@@ -16,7 +16,7 @@ export default defineConfig([
     languageOptions: {
       ecmaVersion: 2020,
        globals: {
-        ...globals.node,  // Node.js global'lerini ekle
+        ...globals.node,  
         ...globals.browser,
       },
       parserOptions: {
