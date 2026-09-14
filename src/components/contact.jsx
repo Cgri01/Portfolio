@@ -71,7 +71,7 @@ const Contact = () => {
     {
       icon: '📍',
       title: 'Konum',
-      value: 'Adana, Türkiye / Lefkoşa, Kuzey Kıbrıs',
+      value: 'Adana, Türkiye',
       link: '#'
     }
   ];
