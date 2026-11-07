@@ -1,17 +1,21 @@
+import { useLanguage } from '../i18n/LanguageContext';
+
 const Skills = () => {
+  const { t } = useLanguage();
+
   const skillCategories = [
     {
-      category: "Frontend",
+      category: t.skills.categories[0],
       icon: "🎨",
       skills: ["Angular", "JavaScript", "HTML5", "CSS3", "TailwindCSS", "TypeScript", "Vue.js", "Bootstrap"]
     },
     {
-      category: "Backend",
+      category: t.skills.categories[1],
       icon: "⚙️",
       skills: ["C#", "SQL" , "Node.js", "Express.js", "Java"]
     },
     {
-      category: "Araçlar & Diğer",
+      category: t.skills.categories[2],
       icon: "🛠️",
       skills: ["Git", "GitHub", "VS Code"]
     }
@@ -23,10 +27,10 @@ const Skills = () => {
         {/* Section Başlığı */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Yeteneklerim
+            {t.skills.title}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Geliştirme sürecinde kullandığım teknolojiler ve araçlar
+            {t.skills.subtitle}
           </p>
           <div className="w-20 h-1 bg-blue-600 mx-auto mt-4"></div>
         </div>
@@ -34,7 +38,7 @@ const Skills = () => {
         {/* Skills Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {skillCategories.map((category, categoryIndex) => (
-            <div 
+            <div
               key={categoryIndex}
               className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
             >
@@ -45,7 +49,7 @@ const Skills = () => {
                   {category.category}
                 </h3>
               </div>
-              
+
               {/* Skills Listesi */}
               <div className="flex flex-wrap gap-3 justify-center">
                 {category.skills.map((skill, skillIndex) => (
@@ -66,23 +70,20 @@ const Skills = () => {
           <div className="bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-xl p-6">
             <h3 className="text-xl font-bold mb-4 flex items-center">
               <span className="text-2xl mr-3">🚀</span>
-              Sürekli Gelişim
+              {t.skills.growthTitle}
             </h3>
             <p className="leading-relaxed opacity-90">
-              Teknoloji dünyası hızla değişiyor ve ben de bu değişime ayak uydurmak için 
-              sürekli yeni teknolojiler öğreniyor, kendimi geliştiriyorum.
+              {t.skills.growthText}
             </p>
           </div>
-          
+
           <div className="bg-gradient-to-br from-gray-800 to-gray-900 text-white rounded-xl p-6">
             <h3 className="text-xl font-bold mb-4 flex items-center">
               <span className="text-2xl mr-3">🎯</span>
-              Öğrenme Yolculuğum
+              {t.skills.journeyTitle}
             </h3>
             <p className="leading-relaxed opacity-90">
-              Şu anda <strong>Java</strong>, ve <strong>React Native </strong> 
-              üzerine odaklanıyorum. Her gün yeni bir şey öğrenmek 
-              benim için bir tutku.
+              {t.skills.journeyText}
             </p>
           </div>
         </div>

@@ -1,9 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
+import { useLanguage } from '../i18n/LanguageContext';
 
 const Chatbot = () => {
+  const { t } = useLanguage();
+
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { role: 'assistant', content: 'Merhaba! Çağrı hakkında merak ettiğin bir şey var mı, bana sorabilirsin?' }
+    { role: 'assistant', content: t.chatbot.welcome }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -16,6 +19,15 @@ const Chatbot = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages, isOpen]);
+
+  // Dil değiştiğinde karşılama mesajını güncelle
+  useEffect(() => {
+    setMessages((prev) =>
+      prev.length === 1 && prev[0].role === 'assistant'
+        ? [{ role: 'assistant', content: t.chatbot.welcome }]
+        : prev
+    );
+  }, [t.chatbot.welcome]);
 
 const handleSend = async () => {
   const trimmed = input.trim();
@@ -42,14 +54,14 @@ const handleSend = async () => {
     } else {
       setMessages((prev) => [
         ...prev,
-        { role: 'assistant', content: 'Bir hata oluştu, tekrar dener misin?' }
+        { role: 'assistant', content: t.chatbot.errorReply }
       ]);
     }
   } catch (error) {
     console.error(error);
     setMessages((prev) => [
       ...prev,
-      { role: 'assistant', content: 'Bağlantı hatası, tekrar dener misin?' }
+      { role: 'assistant', content: t.chatbot.connectionError }
     ]);
   } finally {
     setIsLoading(false);
@@ -69,7 +81,7 @@ const handleSend = async () => {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="fixed bottom-6 right-6 z-50 bg-blue-600 hover:bg-blue-700 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110"
-        aria-label="Chatbot aç/kapat"
+        aria-label={t.chatbot.open}
       >
         {isOpen ? (
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -88,8 +100,8 @@ const handleSend = async () => {
           {/* Header */}
           <div className="bg-blue-600 text-white px-4 py-3 flex items-center justify-between">
             <div>
-              <p className="font-semibold text-sm">Çağrı'nın AI Asistanı</p>
-              <p className="text-xs text-blue-100">Sorularını sor, hemen cevaplayayım</p>
+              <p className="font-semibold text-sm">{t.chatbot.title}</p>
+              <p className="text-xs text-blue-100">{t.chatbot.subtitle}</p>
             </div>
           </div>
 
@@ -107,7 +119,7 @@ const handleSend = async () => {
                       : 'bg-white text-gray-800 border border-gray-200 rounded-bl-sm'
                   }`}
                 >
-                  
+
                   {msg.content}
                 </div>
               </div>
@@ -116,7 +128,7 @@ const handleSend = async () => {
             {isLoading && (
               <div className="flex justify-start">
                 <div className="bg-white border border-gray-200 rounded-2xl rounded-bl-sm px-3 py-2 text-sm text-gray-400">
-                  Yazıyor...
+                  {t.chatbot.typing}
                 </div>
               </div>
             )}
@@ -130,7 +142,7 @@ const handleSend = async () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Bir şey sor..."
+              placeholder={t.chatbot.placeholder}
               rows="1"
               disabled={isLoading}
               className="flex-1 resize-none border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"

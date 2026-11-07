@@ -1,9 +1,11 @@
 import {useState , useEffect} from 'react';
+import { useLanguage } from '../i18n/LanguageContext';
 
 const Hero = () => {
+  const { t } = useLanguage();
 
   const [textIndex , setTextIndex] = useState(0);
-  const texts = ["Yazılım Mühendisi" , "Web Geliştirici" , "Teknoloji Meraklısı" , "Problem Çözücü"];
+  const texts = t.hero.titles;
 
   //Yazı animasyonu
   useEffect(() => {
@@ -12,11 +14,11 @@ const Hero = () => {
 
     } , 2000);
     return () => clearInterval(interval);
-  }   , []);
+  }   , [texts.length]);
 
   return (
     <section id='home' className='min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 pt-16'>
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Sol Taraftaki Metin */}
@@ -28,27 +30,27 @@ const Hero = () => {
               </div><h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
                 Çağrı <span className="text-blue-600">Alagöz</span>
               </h1>
-              
+
               <div className="h-16 mb-6">
                 <span className="text-xl md:text-2xl text-gray-600 font-medium transition-transform duration-500 inline-block">
                   {texts[textIndex]}
                 </span>
               </div>
- 
+
               <p className="text-lg text-gray-600 mb-8 max-w-2xl">
-                Yazılım mühendisi olarak, web geliştirme ve teknolojiye olan tutkumla yenilikçi çözümler üretmeyi hedefliyorum. Problem çözme yeteneğim ve sürekli öğrenme isteğimle, her projede en iyisini sunmayı amaçlıyorum.
+                {t.hero.description}
               </p>
 
               {/* Butonlar */}
               <div className=" flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <a href="#projects"
                 className='bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl'>
-                  Projelerim
+                  {t.hero.projectsBtn}
                 </a>
                 <a href="#contact"
-                className='border-2 border-gray-300 hover:border-blue-600 text-gray-700 hover:text-blue-600 px-8 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105'>İletişim</a>
+                className='border-2 border-gray-300 hover:border-blue-600 text-gray-700 hover:text-blue-600 px-8 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105'>{t.hero.contactBtn}</a>
               </div>
-              
+
               {/* SOSYAL MEDYA IKONLARI */}
               <div className="flex justify-center lg:justify-start space-x-4 mt-8">
                 {/* TWITTER */}
@@ -88,14 +90,14 @@ const Hero = () => {
                 {/* İllüstrasyon */}
                 <div className="text-center text-white">
                   <div className="w-32 h-32 bg-white/20 rounded-full mx-auto mb-4 flex items-center justify-center">
-                    <img src="/1.jpg" alt="" class="rounded-3xl" />
+                    <img src="/1.jpg" alt="" className="rounded-3xl" />
                   </div>
-                  <p className="text-lg font-medium">Çağrı Alagöz</p>
+                  <p className="text-lg font-medium">{t.hero.name}</p>
                   {/* <p className="text-sm opacity-90">Portfolio</p> */}
                 </div>
               </div>
             </div>
-            
+
             {/* Dekoratif elementler */}
             <div className="absolute -top-4 -right-4 w-24 h-24 bg-yellow-400 rounded-full opacity-20 animate-pulse"></div>
             <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-blue-400 rounded-full opacity-20 animate-pulse delay-1000"></div>

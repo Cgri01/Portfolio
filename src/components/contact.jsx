@@ -1,13 +1,17 @@
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
+import { useLanguage } from '../i18n/LanguageContext';
+
 const Contact = () => {
+  const { t } = useLanguage();
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     subject: '',
     message: ''
   });
-  
+
   const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
@@ -36,8 +40,8 @@ const Contact = () => {
     )
     .then((result) => {
       console.log('Email gönderildi:', result.text);
-      alert('Mesajınızı aldım! En kısa sürede dönüş yapacağım.');
-      
+      alert(t.contact.success);
+
       // Formu temizle
       setFormData({
         name: '',
@@ -48,7 +52,7 @@ const Contact = () => {
     })
     .catch((error) => {
       console.error('Email gönderilemedi:', error);
-      alert('Mesaj gönderilemedi. Lütfen daha sonra tekrar deneyin veya direkt email atın.');
+      alert(t.contact.error);
     })
     .finally(() => {
       setIsLoading(false);
@@ -58,20 +62,20 @@ const Contact = () => {
   const contactMethods = [
     {
       icon: '📧',
-      title: 'E-posta',
+      title: t.contact.email,
       value: 'cgriag@gmail.com',
       link: 'mailto:cgriag@gmail.com'
     },
     {
       icon: '📱',
-      title: 'Telefon',
+      title: t.contact.phone,
       value: '+90 541 732 59 25',
       link: 'tel:+905417325925'
     },
     {
       icon: '📍',
-      title: 'Konum',
-      value: 'Adana, Türkiye',
+      title: t.contact.location,
+      value: t.contact.locationValue,
       link: '#'
     }
   ];
@@ -82,11 +86,10 @@ const Contact = () => {
         {/* Section Başlığı */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            İletişim
+            {t.contact.title}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Bir proje üzerinde birlikte çalışmak veya sadece merhaba demek isterseniz, 
-            benimle iletişime geçmekten çekinmeyin!
+            {t.contact.subtitle}
           </p>
           <div className="w-20 h-1 bg-blue-600 mx-auto mt-4"></div>
         </div>
@@ -95,12 +98,11 @@ const Contact = () => {
           {/* İletişim Bilgileri */}
           <div>
             <h3 className="text-2xl font-bold text-gray-900 mb-6">
-              İletişim Bilgilerim
+              {t.contact.infoTitle}
             </h3>
-            
+
             <p className="text-gray-600 mb-8 leading-relaxed">
-              Aşağıdaki iletişim kanallarından bana ulaşabilir veya formu doldurarak 
-              direkt mesaj gönderebilirsiniz. En kısa sürede size dönüş yapacağım.
+              {t.contact.infoText}
             </p>
 
             {/* İletişim Metodları */}
@@ -126,14 +128,14 @@ const Contact = () => {
           {/* İletişim Formu */}
           <div className="bg-gray-50 rounded-xl p-8">
             <h3 className="text-2xl font-bold text-gray-900 mb-6">
-              Mesaj Gönder
+              {t.contact.formTitle}
             </h3>
-            
+
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                    İsim *
+                    {t.contact.name} *
                   </label>
                   <input
                     type="text"
@@ -144,13 +146,13 @@ const Contact = () => {
                     required
                     disabled={isLoading}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 disabled:opacity-50"
-                    placeholder="Adınız"
+                    placeholder={t.contact.namePlaceholder}
                   />
                 </div>
-                
+
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                    E-posta *
+                    {t.contact.emailLabel} *
                   </label>
                   <input
                     type="email"
@@ -161,14 +163,14 @@ const Contact = () => {
                     required
                     disabled={isLoading}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 disabled:opacity-50"
-                    placeholder="email@example.com"
+                    placeholder={t.contact.emailPlaceholder}
                   />
                 </div>
               </div>
 
               <div>
                 <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-                  Konu *
+                  {t.contact.subject} *
                 </label>
                 <input
                   type="text"
@@ -179,13 +181,13 @@ const Contact = () => {
                   required
                   disabled={isLoading}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 disabled:opacity-50"
-                  placeholder="Mesaj konusu"
+                  placeholder={t.contact.subjectPlaceholder}
                 />
               </div>
 
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                  Mesaj *
+                  {t.contact.message} *
                 </label>
                 <textarea
                   id="message"
@@ -196,7 +198,7 @@ const Contact = () => {
                   disabled={isLoading}
                   rows="6"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none disabled:opacity-50"
-                  placeholder="Mesajınızı buraya yazın..."
+                  placeholder={t.contact.messagePlaceholder}
                 ></textarea>
               </div>
 
@@ -211,10 +213,10 @@ const Contact = () => {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    Gönderiliyor...
+                    {t.contact.sending}
                   </>
                 ) : (
-                  'Mesajı Gönder'
+                  t.contact.submit
                 )}
               </button>
             </form>

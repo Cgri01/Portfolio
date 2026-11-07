@@ -6,18 +6,20 @@ import Projects from "./components/projects";
 import Skills from "./components/skills";
 import Contact from "./components/contact";
 import Chatbot from "./components/chatbot";
+import LanguageToggle from "./components/language-toggle";
+import { LanguageProvider } from "./i18n/LanguageContext";
 
 function App() {
   // Smooth scroll için
   useEffect(() => {
     const handleSmoothScroll = (e) => {
       const href = e.currentTarget.getAttribute('href');
-      
+
       if (href && href.startsWith('#')) {
         e.preventDefault();
         const targetId = href.substring(1);
         const targetElement = document.getElementById(targetId);
-        
+
         if (targetElement) {
           window.scrollTo({
             top: targetElement.offsetTop - 80, // Navbar yüksekliği kadar boşluk
@@ -41,18 +43,19 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen">
-      <Navbar />
-      <Hero />
-      <About />
-      <Projects /> 
-      <Skills />
-      <Contact />
-      <Chatbot />
-    </div>
+    <LanguageProvider>
+      <div className="min-h-screen">
+        <Navbar />
+        <LanguageToggle />
+        <Hero />
+        <About />
+        <Projects />
+        <Skills />
+        <Contact />
+        <Chatbot />
+      </div>
+    </LanguageProvider>
   );
 }
 
 export default App;
-
-
