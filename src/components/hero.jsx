@@ -1,5 +1,5 @@
 import {useState , useEffect} from 'react';
-import { useLanguage } from '../i18n/LanguageContext';
+import { useLanguage } from '../i18n/useLanguage';
 
 const Hero = () => {
   const { t } = useLanguage();

@@ -7,7 +7,7 @@ import Skills from "./components/skills";
 import Contact from "./components/contact";
 import Chatbot from "./components/chatbot";
 import LanguageToggle from "./components/language-toggle";
-import { LanguageProvider } from "./i18n/LanguageContext";
+import { LanguageProvider } from './i18n/LanguageProvider';
 
 function App() {
   // Smooth scroll için

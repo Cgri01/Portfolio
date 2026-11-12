@@ -1,6 +1,6 @@
 import ChatAppImage from '/src/assets/ChatApp.png';
 import NeuralStyleTransferImage from '/src/assets/NeuralStyle.png';
-import { useLanguage } from '../i18n/LanguageContext';
+import { useLanguage } from '../i18n/useLanguage';
 
 const Projects = () => {
   const { t } = useLanguage();

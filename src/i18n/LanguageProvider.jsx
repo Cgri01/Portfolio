@@ -1,7 +1,6 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { LanguageContext } from "./language-context";
 import { DEFAULT_LANGUAGE, translations } from "./translations";
-
-const LanguageContext = createContext(null);
 
 const STORAGE_KEY = "portfolio-language";
 
@@ -43,21 +42,10 @@ export const LanguageProvider = ({ children }) => {
       language,
       setLanguage,
       t: translations[language],
-      toggleLanguage: () =>
-        setLanguage((prev) => (prev === "tr" ? "en" : "tr")),
+      toggleLanguage: () => setLanguage((prev) => (prev === "tr" ? "en" : "tr")),
     }),
     [language]
   );
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
-};
-
-export const useLanguage = () => {
-  const context = useContext(LanguageContext);
-
-  if (!context) {
-    throw new Error("useLanguage, LanguageProvider içinde kullanılmalıdır.");
-  }
-
-  return context;
 };

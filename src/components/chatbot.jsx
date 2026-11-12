@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
-import { useLanguage } from '../i18n/LanguageContext';
+import { useLanguage } from '../i18n/useLanguage';
 
 const Chatbot = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
@@ -29,44 +29,52 @@ const Chatbot = () => {
     );
   }, [t.chatbot.welcome]);
 
-const handleSend = async () => {
-  const trimmed = input.trim();
-  if (!trimmed || isLoading) return;
+  const handleSend = async () => {
+    const trimmed = input.trim();
+    if (!trimmed || isLoading) return;
 
-  const userMessage = { role: 'user', content: trimmed };
-  const updatedMessages = [...messages, userMessage];
+    const userMessage = { role: 'user', content: trimmed };
+    const updatedMessages = [...messages, userMessage];
 
-  setMessages(updatedMessages);
-  setInput('');
-  setIsLoading(true);
+    setMessages(updatedMessages);
+    setInput('');
+    setIsLoading(true);
 
-  try {
-    const res = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messages: updatedMessages })
-    });
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messages: updatedMessages,
+          language, // Backend'in doğru dilde yanıt vermesi için
+        })
+      });
 
-    const data = await res.json();
+      const data = await res.json().catch(() => ({}));
 
-    if (data.reply) {
-      setMessages((prev) => [...prev, { role: 'assistant', content: data.reply }]);
-    } else {
+      if (!res.ok) {
+        console.error('Chat API hatası:', res.status, data);
+        throw new Error(data?.detail || data?.error || `HTTP ${res.status}`);
+      }
+
+      if (data.reply) {
+        setMessages((prev) => [...prev, { role: 'assistant', content: data.reply }]);
+      } else {
+        setMessages((prev) => [
+          ...prev,
+          { role: 'assistant', content: t.chatbot.errorReply }
+        ]);
+      }
+    } catch (error) {
+      console.error(error);
       setMessages((prev) => [
         ...prev,
-        { role: 'assistant', content: t.chatbot.errorReply }
+        { role: 'assistant', content: t.chatbot.connectionError }
       ]);
+    } finally {
+      setIsLoading(false);
     }
-  } catch (error) {
-    console.error(error);
-    setMessages((prev) => [
-      ...prev,
-      { role: 'assistant', content: t.chatbot.connectionError }
-    ]);
-  } finally {
-    setIsLoading(false);
-  }
-};
+  };
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
